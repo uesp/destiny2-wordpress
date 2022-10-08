@@ -1,0 +1,19 @@
+#
+# Deployment file for the UESP Destiny2 WordPress plugin
+#
+
+name = uesp.destiny2wordpress
+staged = false
+
+ignore = .hg*
+ignore = .git*
+ignore = *.deploy
+ignore = *.sh
+ignore = *.sql
+ignore = cron*
+ignore = *.log
+
+dest = content2.uesp.net:/home/uesp/blog/wp-content/plugins/uesp-destiny2-wordpress/
+
+# chown_dest = apache {dest}
+# chmod_dest = g+rw -R {dest}

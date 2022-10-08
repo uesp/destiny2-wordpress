@@ -1,0 +1,225 @@
+.uespDestiny2Tooltip {
+	position: absolute;
+	z-index: 100;
+	width: 400px;
+	box-sizing: content-box;
+}
+
+#uespDestiny2TooltipRoot {
+	width: 400px;
+	max-height: 800px;
+	overflow: hidden;
+	font-family: "roboto condensed", Helvetica, Arial, sans-serif;
+	line-height: 1.1;
+	color: white;
+	border: ridge 2px #553;
+}
+
+#uespD2TooltipImage {
+	float: left;
+	width: 64px;
+	height: 64px;
+	position: relative;
+	left: 0px;
+	top: 0px;
+}
+
+#uespD2TooltipImage img:first-child {
+	width: 64px;
+	height: 64px;
+	position: relative;
+	top: -5px;
+	left: -5px;
+}
+
+#uespD2TooltipImage img:nth-child(2) {
+	width: 64px;
+	height: 64px;
+	position: absolute;
+	top: -5px;
+	left: -5px;
+}
+
+#uespD2TooltipBody {
+	text-align: left;
+	background-color: #2b2e28;
+	color: white;
+	font-size: 12px;
+	min-height: 100px;
+	padding: 10px;
+	color: white;
+}
+
+#uespD2TooltipTitleRoot {
+	padding: 5px;
+	height: 54px;
+	box-sizing: content-box;
+}
+
+.uespD2TooltipTitleRoot {
+	background-color: #999;	
+}
+
+#uespD2TooltipTitle {
+	font-size: 24px;
+	font-weight: bold;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+#uespD2TooltipSubTitle {
+	font-size: 16px;
+	font-weight: normal;
+	padding-top: 5px;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+#uespD2TooltipRequires {
+	
+}
+
+#uespD2TooltipMainStat {
+	
+}
+
+#uespD2TooltipStats {
+	
+}
+
+#uespD2TooltipSockets {
+	
+}
+
+#uespD2TooltipFooter {
+	
+}
+
+.uespDestiny2Toolip {
+	display: inline-block;
+}
+
+.uespD2ItemTypeError {
+	background-color: #aa3333;
+	color: #eee;
+}
+
+.uespD2ItemTypeCommon {
+	background-color: #c3bcb4;
+	color: #333;
+}
+
+.uespD2ItemTypeUncommon {
+	background-color: #366f42;
+	color: #fff;
+}
+
+.uespD2ItemTypeRare {
+	background-color: #5076a3;
+	color: #fff;
+}
+
+.uespD2ItemTypeLegendary {
+	background-color: #522f65;
+	color: #fff;
+}
+
+.uespD2ItemTypeExotic {
+	background-color: #ceaf33;
+	color: #fff;
+}
+
+.uespD2ItemTypeTextError {
+	color: #aa3333;
+}
+
+.uespD2ItemTypeTextCommon {
+	color: #c3bcb4;
+}
+
+.uespD2ItemTypeTextUncommon {
+	color: #366f42;
+}
+
+.uespD2ItemTypeTextRare {
+	color: #5076a3;
+}
+
+.uespD2ItemTypeTextLegendary {
+	color: #824f95;
+}
+
+.uespD2ItemTypeTextExotic {
+	color: #ceaf33;
+}
+
+.uespD2StatRow {
+	width: 100%;
+	padding: 2px;
+}
+
+.uespD2StatName {
+	display: inline-block;
+	width: 120px;
+	text-align: right;
+	margin-right: 5px;
+	overflow: hidden;
+	white-space: nowrap;
+	vertical-align: middle;
+}
+
+.uespD2StatValueRoot {
+	display: inline-block;
+	border: 2px solid #eee;
+	height: 10px;
+	vertical-align: middle;
+}
+
+.uespD2StatValue {
+	display: inline-block;
+	background-color: #eee;
+	height: 12px;
+}
+
+.uespD2StatValueText {
+	display: inline-block;
+	margin-left: 3px;
+}
+
+.uespD2HorizRule {
+	border: 1px inset #999;
+}
+
+.uespD2SocketRow {
+	width: 100%;
+	clear: both;
+	margin-bottom: 5px;
+}
+
+.uespD2SocketName {
+	font-weight: bold;
+	white-space: nowrap;
+	overflow: hidden;
+	display: inline;
+}
+
+.uespD2SocketDesc {
+	font-size: 12px;
+	margin-left: 5px;
+	color: #ddd;
+	display: inline;
+}
+
+.uespD2SocketIcon {
+	float: left;
+	margin-right: 5px;
+}
+
+.uespD2SocketIcon img {
+	width: 24px;
+	height: 24px;
+}
+
+.uespD2TooltipStatsDesc {
+	font-size: 12px;
+}
