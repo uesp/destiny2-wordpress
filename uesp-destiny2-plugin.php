@@ -24,6 +24,24 @@ class CUespDestiny2WordPressPlugin extends CUespDestiny2WordPressData
 		wp_enqueue_style( 'uespd2buildcss', plugin_dir_url(__FILE__) . 'css/build.css' );
 		
 		wp_enqueue_script( 'uespd2tooltipjs', plugin_dir_url(__FILE__) . 'js/tooltip.js', array( 'jquery' ) );
+		wp_enqueue_script( 'uespd2buildjs', plugin_dir_url(__FILE__) . 'js/builds.js', array( 'jquery' ) );
+		
+		wp_add_inline_script( 'uespd2buildjs', self::GetBuildDataJs(), 'before'); 
+	}
+	
+	
+	public static function GetBuildDataJs()
+	{
+		$output = 'const UESPD2_KINETICWEAPON_DATA = ';
+		$output .= json_encode(self::DATA_KINETICWEAPONS) . ";\n";
+		
+		$output .= 'const UESPD2_ENERGYWEAPON_DATA = ';
+		$output .= json_encode(self::DATA_ENERGYWEAPONS) . ";\n";
+		
+		$output .= 'const UESPD2_POWERWEAPON_DATA = ';
+		$output .= json_encode(self::DATA_POWERWEAPONS) . ";\n";
+		
+		return $output;
 	}
 	
 	
@@ -46,6 +64,17 @@ class CUespDestiny2WordPressPlugin extends CUespDestiny2WordPressData
 		$name = self::EscapeHtml($text);
 		
 		return "<img src=\"https://www.bungie.net$icon\" title=\"$name\">";
+	}
+	
+	
+	public static function MakeLightGGLinkTag($id, $title)
+	{
+		$id = intval($id);
+		if ($id <= 0) return $title;
+		
+		$title = self::EscapeHtml($title);
+		
+		return "<a href=\"https://light.gg/db/items/$id/\">$title</a>";
 	}
 	
 	
@@ -151,6 +180,7 @@ class CUespDestiny2WordPressPlugin extends CUespDestiny2WordPressData
 
 
 add_action( 'wp_enqueue_scripts', 'CUespDestiny2WordPressPlugin::EnqueueResources' );
+add_action( 'admin_enqueue_scripts', 'CUespDestiny2WordPressPlugin::EnqueueResources' );
 add_filter( 'piklist_post_types', 'CUespDestiny2WordPressPlugin::PikListPostTypes' );
 add_action( 'init', 'CUespDestiny2WordPressPlugin::RegisterTaxonomies' );
 

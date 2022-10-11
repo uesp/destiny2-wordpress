@@ -188,16 +188,27 @@ window.UespDestiny2FindTooltipLinks = function()
 		if (href == null) return;
 		
 			//https://www.light.gg/db/items/136355432/mk-44-stand-asides/
+			//https://light.gg/db/items/136355432/mk-44-stand-asides/
 		var match = href.match(/https:\/\/www\.light\.gg\/db\/items\/([0-9]+)\/.*/);
 		
 		if (!match)
 		{
-			var match = href.match(/https:\/\/www\.light\.gg\/db\/collectibles\/([0-9]+)\/.*/);
-			if (!match) return;
+			match = href.match(/https:\/\/light\.gg\/db\/items\/([0-9]+)\/.*/);
 			
-			$this.attr("collectibleid", match[1]);
-			$this.addClass('uespDestiny2Toolip');
-			return;
+			if (!match)
+			{
+				match = href.match(/https:\/\/www\.light\.gg\/db\/collectibles\/([0-9]+)\/.*/);
+				
+				if (!match)
+				{
+					match = href.match(/https:\/\/light\.gg\/db\/collectibles\/([0-9]+)\/.*/);
+					if (!match) return;
+				}
+				
+				$this.attr("collectibleid", match[1]);
+				$this.addClass('uespDestiny2Toolip');
+				return;
+			}
 		}
 		
 		var hash = match[1];
