@@ -37,13 +37,33 @@ function uespDestiny2OutputBuild_Content()
 	
 	?>	
 <h2>Table of Contents</h2>
-<ul>
-	<li>Testing123
+<ul class="ez-toc-list ez-toc-list-level-1">
+	<li class="ez-toc-page-1 ez-toc-heading-level-3"><a class="ez-toc-link ez-toc-heading-1 __mPS2id _mPS2id-h mPS2id-highlight" href="#Should_you_play_this_build" title="Should you play this build?">Should you play this build?</a></li>
+	<li class="ez-toc-page-1 ez-toc-heading-level-3"><a class="ez-toc-link ez-toc-heading-4 __mPS2id _mPS2id-h" href="#Subclass" title="Subclass">Subclass</a>
+		<ul class="ez-toc-list-level-4">
+			<li class="ez-toc-page-1 ez-toc-heading-level-4"><a class="ez-toc-link ez-toc-heading-6 __mPS2id _mPS2id-h" href="#Abilities" title="Abilities">Abilities</a></li>
+			<li class="ez-toc-page-1 ez-toc-heading-level-4"><a class="ez-toc-link ez-toc-heading-7 __mPS2id _mPS2id-h" href="#Aspects" title="Aspects">Aspects</a></li>
+			<li class="ez-toc-page-1 ez-toc-heading-level-4"><a class="ez-toc-link ez-toc-heading-8 __mPS2id _mPS2id-h" href="#Fragments" title="Fragments:">Fragments:</a></li>
+		</ul>
+	</li>
+	<li class="ez-toc-page-1 ez-toc-heading-level-3"><a class="ez-toc-link ez-toc-heading-9 __mPS2id _mPS2id-h" href="#Gear" title="Gear">Gear</a>
+		<ul class="ez-toc-list-level-4">
+			<li class="ez-toc-heading-level-4"><a class="ez-toc-link ez-toc-heading-10 __mPS2id _mPS2id-h" href="#Kinetic_Weapons" title="Kinetic Weapons">Kinetic Weapons</a></li>
+			<li class="ez-toc-page-1 ez-toc-heading-level-4"><a class="ez-toc-link ez-toc-heading-11 __mPS2id _mPS2id-h" href="#Energy_Weapons" title="Energy Weapons">Energy Weapons</a></li>
+			<li class="ez-toc-page-1 ez-toc-heading-level-4"><a class="ez-toc-link ez-toc-heading-12 __mPS2id _mPS2id-h" href="#Heavy_Weapons" title="Heavy Weapons">Heavy Weapons</a></li>
+			<li class="ez-toc-page-1 ez-toc-heading-level-4"><a class="ez-toc-link ez-toc-heading-13 __mPS2id _mPS2id-h" href="#Exotic_Armor" title="Exotic Armor">Exotic Armor</a></li>
+			<li class="ez-toc-page-1 ez-toc-heading-level-4"><a class="ez-toc-link ez-toc-heading-14 __mPS2id _mPS2id-h" href="#Armor_Stats" title="Armor Stats">Armor Stats</a></li>
+			<li class="ez-toc-page-1 ez-toc-heading-level-4"><a class="ez-toc-link ez-toc-heading-15 __mPS2id _mPS2id-h" href="#Important_Mods" title="Important Mods">Important Mods</a></li>
+		</ul>
+	</li>
+	<li class="ez-toc-page-1 ez-toc-heading-level-3"><a class="ez-toc-link ez-toc-heading-16 __mPS2id _mPS2id-h" href="#Playstyle" title="Playstyle">Playstyle</a></li>
 </ul>
+
 <?php
 
 	the_content();
 	
+	//uespDestiny2Build_OutputGeneral($buildData);
 	uespDestiny2Build_OutputAbilities($buildData);
 	uespDestiny2Build_OutputAspects($buildData);
 	uespDestiny2Build_OutputFragments($buildData);
@@ -141,7 +161,8 @@ function uespDestiny2Build_CreateDataText($datas, $constantName, $typeName = nul
 
 function uespDestiny2Build_OutputAbilities($buildData)
 {
-	$output = "<h2 id=\"uespd2Abilities\" class=\"build-header\">Abilities</h2>";
+	$output = "<a name=\"Abilities\"></a>";
+	$output .= "<h2 id=\"uespd2Abilities\" class=\"build-header\">Abilities</h2>";
 	
 	//Array ( [super_ability_id] => Array ( [0] => ) [class_ability_id] => Array ( [0] => 3636300852 ) [movement_ability_id] => Array ( [0] => 3686638441 ) [arc_grenade_id] => Array ( [0] => 2909720723 ) [arc_melee_id] => Array ( [0] => 2708585279 ) )
 	$abilityData = unserialize($buildData["abilities_group"][0]);
@@ -172,7 +193,8 @@ function uespDestiny2Build_OutputAbilities($buildData)
 
 function uespDestiny2Build_OutputAspects($buildData)
 {
-	$output = "<h2 id=\"uespd2Aspects\" class=\"build-header\">Aspects</h2>";
+	$output = "<a name=\"Aspects\"></a>";
+	$output .= "<h2 id=\"uespd2Aspects\" class=\"build-header\">Aspects</h2>";
 	
 	$aspectData = unserialize($buildData["aspects_group"][0]);
 	
@@ -190,7 +212,8 @@ function uespDestiny2Build_OutputAspects($buildData)
 
 function uespDestiny2Build_OutputFragments($buildData)
 {
-	$output = "<h2 id=\"uespd2Fragments\" class=\"build-header\">Fragments</h2>";
+	$output = "<a name=\"Fragments\"></a>";
+	$output .= "<h2 id=\"uespd2Fragments\" class=\"build-header\">Fragments</h2>";
 	
 	$fragmentData = unserialize($buildData["fragments_group"][0]);
 	
@@ -206,21 +229,190 @@ function uespDestiny2Build_OutputFragments($buildData)
 }
 
 
-function uespDestiny2Build_OutputGear($buildData)
+function uespDestiny2Build_OutputGeneral($buildData)
 {
-	$output = "<h2 id=\"uespd2Gear\" class=\"build-header\">Gear</h2>";
+	$generalData = unserialize($buildData["general_group"][0]);
+	if ($generalData == null) return $output;
 	
-	$output .= uespDestiny2Build_CreateWeaponHtml($buildData, 'Kinetic Weapons', 'kinetic');
-	$output .= uespDestiny2Build_CreateWeaponHtml($buildData, 'Energy Weapons', 'energy');
-	$output .= uespDestiny2Build_CreateWeaponHtml($buildData, 'Heavy Weapons', 'power');
+	$introHtml = $generalData['introduction_id'];
+	
+	$output = "<a name=\"Should_you_play_this_build\"></a>";
+	$output .= $introHtml;
 	
 	print($output);
 }
 
 
+function uespDestiny2Build_OutputGear($buildData)
+{
+	$output = "<a name=\"Gear\"></a>";
+	$output .= "<h2 id=\"uespd2Gear\" class=\"build-header\">Gear</h2>";
+	
+	$output .= uespDestiny2Build_CreateWeaponHtml($buildData, 'Kinetic Weapons', 'kinetic');
+	$output .= uespDestiny2Build_CreateWeaponHtml($buildData, 'Energy Weapons', 'energy');
+	$output .= uespDestiny2Build_CreateWeaponHtml($buildData, 'Heavy Weapons', 'power');
+	
+	$output .= uespDestiny2Build_CreateExoticArmorHtml($buildData);
+	$output .= uespDestiny2Build_CreateArmorStatsHtml($buildData);
+	$output .= uespDestiny2Build_CreateArmorModsHtml($buildData);
+	
+	print($output);
+}
+
+
+function uespDestiny2Build_CreateArmorModsHtml($buildData)
+{
+	$output = '';
+	
+	$modData = unserialize($buildData["armor_mods_group"][0]);
+	if ($modData == null) return "";
+	
+	$output = "<a name=\"Important_Mods\"></a>";
+	$output .= "<h3 id=\"uespd2ImportantMods\" class=\"build-header\">Important Mods</h3>";
+	
+	$intro = $modData['armor_mods_intro'];
+	if ($intro) $output .= $intro;
+	
+	$output .= '<table class="uespd2DataTable">';
+	
+	$output .= uespDestiny2Build_CreateArmorModTable($buildData, 'arm', 'Arms', 'ARMARMORMODS');
+	$output .= uespDestiny2Build_CreateArmorModTable($buildData, 'chest', 'Chest', 'CHESTARMORMODS');
+	$output .= uespDestiny2Build_CreateArmorModTable($buildData, 'leg', 'Legs', 'LEGARMORMODS');
+	$output .= uespDestiny2Build_CreateArmorModTable($buildData, 'head', 'Head', 'HEADARMORMODS');
+	$output .= uespDestiny2Build_CreateArmorModTable($buildData, 'class', 'Class', 'CLASSARMORMODS');
+	
+	$output .= '</table>';
+	
+	$addt = $modData['armor_mods_additional'];
+	if ($addt) $output .= $addt;
+	
+	return $output;
+}
+
+
+function uespDestiny2Build_CreateArmorModTable($buildData, $dataType, $modName, $dataConstant)
+{
+	$output = '';
+	
+	$modData = unserialize($buildData[$dataType . '_armor_mods_group'][0]);
+	if ($modData == null) return "";
+	
+	foreach ($modData as $mod)
+	{
+		$modId = intval($mod[$dataType . '_armor_mod_id']);
+		$extraDesc = $mod[$dataType . '_armor_mod_desc'];
+		if ($modId <= 0) continue;
+		
+		$values = CUespDestiny2WordPressPlugin::GetData($dataConstant, $modId, false);
+		if ($values === false) continue;
+		
+		$desc = CUespDestiny2WordPressPlugin::EscapeHtml($values['desc']);
+		$name = CUespDestiny2WordPressPlugin::EscapeHtml($values['name']);
+		$iconTag = CUespDestiny2WordPressPlugin::MakeIconImageTag($values['icon'], $values['name']);
+		if ($extraDesc != "") $desc .= ' ' . CUespDestiny2WordPressPlugin::EscapeHtml($extraDesc);
+		
+		$output .= "<tr>";
+		$output .= "<td>$modName</td>";
+		$output .= "<td>$iconTag<br/>$name<br/>$desc</td>";
+		$output .= "</tr>";
+	}
+	
+	return $output;
+}
+
+
+function uespDestiny2Build_CreateArmorStatsHtml($buildData)
+{
+	$output = '';
+	
+	$armorData = unserialize($buildData["armor_stats_group"][0]);
+	if ($armorData == null) return "";
+	
+	$output = "<a name=\"Armor_Stats\"></a>";
+	$output .= "<h3 id=\"uespd2ExoticArmor\" class=\"build-header\">Armor Stats</h3>";
+	
+	$armorStats = $armorData['armor_stats'];
+	$output .= $armorStats;
+	
+	return $output;
+}
+
+
+function uespDestiny2Build_CreateExoticArmorHtml($buildData)
+{
+	$armorDatas = unserialize($buildData["exotic_armor_group"][0]);
+	if ($armorDatas == null) return "";
+	
+	$output = "<a name=\"Exotic_Armor\"></a>";
+	$output .= "<h3 id=\"uespd2ExoticArmor\" class=\"build-header\">Exotic Armor</h3>";
+	
+	$output .= '<table class="uespd2DataTable">';
+	$output .= '<tr>';
+	$output .= "<th>Exotic Armor</th>";
+	$output .= "<th>Exotic Perk</th>";
+	$output .= "</tr>\n";
+	
+	$textOutput = '';
+	
+	foreach ($armorDatas as $armorData)
+	{
+		$armorId = intval($armorData['exotic_armor_id']);
+		$perkId = intval($armorData['exotic_armor_perk_id']);
+		$extraDesc = $armorData['exotic_armor_desc'];
+		if ($armorId <= 0) continue;
+		
+		$values = CUespDestiny2WordPressPlugin::GetData('EXOTICARMOR', $armorId, false);
+		if ($values === false) continue;
+		
+		$desc = CUespDestiny2WordPressPlugin::EscapeHtml($values['desc']);
+		$name = CUespDestiny2WordPressPlugin::EscapeHtml($values['name']);
+		$iconTag = CUespDestiny2WordPressPlugin::MakeIconImageTag($values['icon'], $values['name']);
+		if ($extraDesc != "") $desc .= ' ' . CUespDestiny2WordPressPlugin::EscapeHtml($extraDesc);
+		
+		$output .= '<tr><td>';
+		$output .= "$iconTag";
+		$output .= "<br/>$name</td>";
+		
+		$textOutput .= "<div class=\"uespd2DataText\">";
+		$textOutput .= "<strong>$name</strong> : $desc";
+		$textOutput .= "</div>";
+		
+		$perkValues = $values['sockets'][$perkId];
+		
+		if ($perkValues)
+		{
+			$name = CUespDestiny2WordPressPlugin::EscapeHtml($perkValues['name']);
+			$iconTag = CUespDestiny2WordPressPlugin::MakeIconImageTag($perkValues['icon'], $perkValues['name']);
+			
+			$output .= "<td>$iconTag<br/>$name</td>";
+		}
+		else
+		{
+			$output .= "<td></td>";
+		}
+	}
+	
+	$output .= "</table>\n";
+	$output .= $textOutput;
+	
+	$stats = CUespDestiny2WordPressPlugin::EscapeHtml($values['armor_stats']);
+	
+	if ($stats != null && $stats != "")
+	{
+		$output = "<a name=\"Armor_Stats\"></a>";
+		$output .= "<h3 id=\"uespd2ArmorStats\" class=\"build-header\">Armor Stats</h3>";
+		$output .= $stats;
+	}
+	
+	return $output;
+}
+
+
 function uespDestiny2Build_CreateWeaponHtml($buildData, $weaponType, $dataType)
 {
-	$output = "<h3 class=\"build-header\">$weaponType</h3>";
+	$label = str_replace(' ', '_', $weaponType);
+	$output = "<a name=\"$label\"></a>";
+	$output .= "<h3 class=\"build-header\">$weaponType</h3>";
 	
 	$weaponData = unserialize($buildData[$dataType . "_weapons_group"][0]);
 	if ($weaponData == null) return $output;
@@ -312,7 +504,6 @@ function uespDestiny2Build_CreateWeaponTextHtml($weaponDatas, $weaponType, $data
 		if ($weaponId <= 0) continue;
 		
 		$values = CUespDestiny2WordPressPlugin::GetData($constantName, $weaponId, false);
-		error_log("uespDestiny2Build_CreateWeaponTableHtml: $values");
 		if ($values === false) continue;
 		
 		$output = '<div class="uespd2DataText">';

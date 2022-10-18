@@ -41,6 +41,24 @@ class CUespDestiny2WordPressPlugin extends CUespDestiny2WordPressData
 		$output .= 'const UESPD2_POWERWEAPON_DATA = ';
 		$output .= json_encode(self::DATA_POWERWEAPONS) . ";\n";
 		
+		$output .= 'const UESPD2_EXOTICARMOR_DATA = ';
+		$output .= json_encode(self::DATA_EXOTICARMOR) . ";\n";
+
+		$output .= 'const UESPD2_LEGARMORMOD_DATA = ';
+		$output .= json_encode(self::DATA_LEGARMORMODS) . ";\n";
+		
+		$output .= 'const UESPD2_HEADARMORMOD_DATA = ';
+		$output .= json_encode(self::DATA_HEADARMORMODS) . ";\n";
+		
+		$output .= 'const UESPD2_ARMARMORMOD_DATA = ';
+		$output .= json_encode(self::DATA_ARMARMORMODS) . ";\n";
+		
+		$output .= 'const UESPD2_CHESTARMORMOD_DATA = ';
+		$output .= json_encode(self::DATA_CHESTARMORMODS) . ";\n";
+		
+		$output .= 'const UESPD2_CLASSARMORMOD_DATA = ';
+		$output .= json_encode(self::DATA_CLASSARMORMODS) . ";\n";
+		
 		return $output;
 	}
 	

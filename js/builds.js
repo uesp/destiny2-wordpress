@@ -29,15 +29,15 @@ window.uespd2UpdateWeaponPerks = function(element, weaponType, updateFromHidden,
 	var id = element.attr('id');
 	var weaponId = parseInt(element.val());
 	
-	var matches = id.match(/_post_meta_([a-zA-Z]+)_weapons_group_0_([a-zA-Z]+)_weapon_id_([0-9]+)/);
+	var matches = id.match(/_post_meta_([a-zA-Z]+)_weapons_group_[0-9]+_([a-zA-Z]+)_weapon_id_([0-9]+)/);
 	if (matches == null) return;
 	
 	var type = matches[1];
 	var index = parseInt(matches[3]);
 	if (isNaN(index) || index < 0) return;
 	
-	var perk1Id = '_post_meta_' + type + '_weapons_group_0_' + type + '_weapon_perk1_id_' + index;
-	var perk2Id = '_post_meta_' + type + '_weapons_group_0_' + type + '_weapon_perk2_id_' + index;
+	var perk1Id = '_post_meta_' + type + '_weapons_group_' + index + '_' + type + '_weapon_perk1_id_' + index;
+	var perk2Id = '_post_meta_' + type + '_weapons_group_' + index + '_' + type + '_weapon_perk2_id_' + index;
 	
 	var perk1 = jQuery('#' + perk1Id);
 	var perk2 = jQuery('#' + perk2Id);
@@ -121,7 +121,6 @@ window.uespd2UpdateWeaponPerkOptions = function(weaponId, perkSelect, weaponData
 		selectValue = '';
 	}
 	
-	//_post_meta_kinetic_weapons_group_0_kinetic_weapon_perk1_id_0
 	if (updateFromHidden !== true)
 	{
 		hiddenValue.val(selectValue);
@@ -135,7 +134,7 @@ window.uespd2UpdateWeaponListPerks = function(e)
 	var id = $this.attr('id');
 	
 		// _post_meta_kinetic_weapons_group_kinetic_weapon_id 
-	var matches = id.match(/_post_meta_([a-zA-Z]+)_weapons_group_0_([a-zA-Z]+)_weapon_id_([0-9]+)/);
+	var matches = id.match(/_post_meta_([a-zA-Z]+)_weapons_group_[0-9]+_([a-zA-Z]+)_weapon_id_([0-9]+)/);
 	if (matches == null) return;
 	
 	var weaponData = null;
@@ -158,29 +157,78 @@ window.uespd2UpdateWeaponPerkFormValue = function(e)
 	var matches = selectId.match(/^(.*)([0-9]+)$/);
 	var hiddenValue = jQuery('#' + matches[1] + 'hidden_' + matches[2]);
 	
-	//var hiddenValue = $this.parent().next().find('input');
-	
 	hiddenValue.val($this.val());
+}
+
+
+window.uespd2UpdateAllArmorPerks = function(updateFromHidden)
+{
+	var selectClass = '_post_meta_exotic_armor_group_exotic_armor_id';
+	var elements = jQuery('select.' + selectClass);
 	
-	//console.log("Changed value to", $this.val(), hiddenValue);
+	elements.each(function()
+	{
+		uespd2UpdateArmorPerks(jQuery(this), updateFromHidden, UESPD2_EXOTICARMOR_DATA);
+	});
+}
+
+
+window.uespd2UpdateArmorListPerks = function(e)
+{
+	var $this = jQuery(this);
+	var id = $this.attr('id');
+	
+		// _post_meta_exotic_armor_group_0_exotic_armor_id_0 
+	var matches = id.match(/_post_meta_exotic_armor_group_[0-9]+_exotic_armor_id_([0-9]+)/);
+	if (matches == null) return;
+	
+	uespd2UpdateArmorPerks($this, false, UESPD2_EXOTICARMOR_DATA);
+}
+
+
+window.uespd2UpdateArmorPerks = function(element, updateFromHidden, armorData)
+{
+	var id = element.attr('id');
+	var armorId = parseInt(element.val());
+	
+		// _post_meta_exotic_armor_group_0_exotic_armor_id_0
+	var matches = id.match(/_post_meta_exotic_armor_group_[0-9]+_exotic_armor_id_([0-9]+)/);
+	if (matches == null) return;
+	
+	var index = parseInt(matches[1]);
+	if (isNaN(index) || index < 0) return;
+	
+	var perkId = '_post_meta_exotic_armor_group_' + index + '_exotic_armor_perk_id_' + index;
+	var perk = jQuery('#' + perkId);
+	
+	uespd2UpdateWeaponPerkOptions(armorId, perk, armorData, updateFromHidden);
+}
+
+
+window.uespd2UpdateArmorPerkFormValue = function(e)
+{
+	uespd2UpdateWeaponPerkFormValue.call(this, e);
 }
 
 
 jQuery(function() {
-	//piklist-field-addmore-wrapper
 	
-	jQuery('._post_meta_kinetic_weapons_group_kinetic_weapon_id').on('change', uespd2UpdateWeaponListPerks );
-	jQuery('._post_meta_energy_weapons_group_energy_weapon_id').on('change', uespd2UpdateWeaponListPerks );
-	jQuery('._post_meta_power_weapons_group_power_weapon_id').on('change', uespd2UpdateWeaponListPerks );
+	jQuery(document).on('change', '._post_meta_kinetic_weapons_group_kinetic_weapon_id', uespd2UpdateWeaponListPerks);
+	jQuery(document).on('change', '._post_meta_energy_weapons_group_energy_weapon_id', uespd2UpdateWeaponListPerks);
+	jQuery(document).on('change', '._post_meta_power_weapons_group_power_weapon_id', uespd2UpdateWeaponListPerks);
 	
-	jQuery('._post_meta_kinetic_weapons_group_kinetic_weapon_perk1_id').on('change', uespd2UpdateWeaponPerkFormValue);
-	jQuery('._post_meta_kinetic_weapons_group_kinetic_weapon_perk2_id').on('change', uespd2UpdateWeaponPerkFormValue);
+	jQuery(document).on('change', '._post_meta_kinetic_weapons_group_kinetic_weapon_perk1_id', uespd2UpdateWeaponPerkFormValue);
+	jQuery(document).on('change', '._post_meta_kinetic_weapons_group_kinetic_weapon_perk2_id', uespd2UpdateWeaponPerkFormValue);
 	
-	jQuery('._post_meta_energy_weapons_group_energy_weapon_perk1_id').on('change', uespd2UpdateWeaponPerkFormValue);
-	jQuery('._post_meta_energy_weapons_group_energy_weapon_perk2_id').on('change', uespd2UpdateWeaponPerkFormValue);
+	jQuery(document).on('change', '._post_meta_energy_weapons_group_energy_weapon_perk1_id', uespd2UpdateWeaponPerkFormValue);
+	jQuery(document).on('change', '._post_meta_energy_weapons_group_energy_weapon_perk2_id', uespd2UpdateWeaponPerkFormValue);
 	
-	jQuery('._post_meta_power_weapons_group_power_weapon_perk1_id').on('change', uespd2UpdateWeaponPerkFormValue);
-	jQuery('._post_meta_power_weapons_group_power_weapon_perk2_id').on('change', uespd2UpdateWeaponPerkFormValue);
+	jQuery(document).on('change', '._post_meta_power_weapons_group_power_weapon_perk1_id', uespd2UpdateWeaponPerkFormValue);
+	jQuery(document).on('change', '._post_meta_power_weapons_group_power_weapon_perk2_id', uespd2UpdateWeaponPerkFormValue);
+	
+	jQuery(document).on('change', '._post_meta_exotic_armor_group_exotic_armor_id', uespd2UpdateArmorListPerks);
+	jQuery(document).on('change', '._post_meta_exotic_armor_group_exotic_armor_perk_id', uespd2UpdateArmorPerkFormValue);
 	
 	uespd2UpdateAllWeaponPerks(true);
+	uespd2UpdateAllArmorPerks(true);
 });
