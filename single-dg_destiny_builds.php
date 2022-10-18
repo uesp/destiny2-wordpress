@@ -26,6 +26,8 @@ function uespDestiny2OutputBuild_NewsVibrantPro()
 	if ( has_post_thumbnail() ) the_post_thumbnail( 'full' );
 	
 	uespDestiny2OutputBuild_Content();
+	
+	get_footer();
 }
 
 
@@ -63,16 +65,11 @@ function uespDestiny2OutputBuild_Content()
 
 	the_content();
 	
-	//uespDestiny2Build_OutputGeneral($buildData);
 	uespDestiny2Build_OutputAbilities($buildData);
 	uespDestiny2Build_OutputAspects($buildData);
 	uespDestiny2Build_OutputFragments($buildData);
 	uespDestiny2Build_OutputGear($buildData);
 	
-	//$tempData = unserialize($buildData["weapons_group"][0]);
-	//print_r($tempData);
-	
-	get_footer();
 }
 
 
@@ -162,7 +159,7 @@ function uespDestiny2Build_CreateDataText($datas, $constantName, $typeName = nul
 function uespDestiny2Build_OutputAbilities($buildData)
 {
 	$output = "<a name=\"Abilities\"></a>";
-	$output .= "<h2 id=\"uespd2Abilities\" class=\"build-header\">Abilities</h2>";
+	$output .= "<h2 id=\"uespd2Abilities\">Abilities</h2>";
 	
 	//Array ( [super_ability_id] => Array ( [0] => ) [class_ability_id] => Array ( [0] => 3636300852 ) [movement_ability_id] => Array ( [0] => 3686638441 ) [arc_grenade_id] => Array ( [0] => 2909720723 ) [arc_melee_id] => Array ( [0] => 2708585279 ) )
 	$abilityData = unserialize($buildData["abilities_group"][0]);
@@ -194,7 +191,7 @@ function uespDestiny2Build_OutputAbilities($buildData)
 function uespDestiny2Build_OutputAspects($buildData)
 {
 	$output = "<a name=\"Aspects\"></a>";
-	$output .= "<h2 id=\"uespd2Aspects\" class=\"build-header\">Aspects</h2>";
+	$output .= "<h2 id=\"uespd2Aspects\">Aspects</h2>";
 	
 	$aspectData = unserialize($buildData["aspects_group"][0]);
 	
@@ -213,7 +210,7 @@ function uespDestiny2Build_OutputAspects($buildData)
 function uespDestiny2Build_OutputFragments($buildData)
 {
 	$output = "<a name=\"Fragments\"></a>";
-	$output .= "<h2 id=\"uespd2Fragments\" class=\"build-header\">Fragments</h2>";
+	$output .= "<h2 id=\"uespd2Fragments\">Fragments</h2>";
 	
 	$fragmentData = unserialize($buildData["fragments_group"][0]);
 	
@@ -246,7 +243,7 @@ function uespDestiny2Build_OutputGeneral($buildData)
 function uespDestiny2Build_OutputGear($buildData)
 {
 	$output = "<a name=\"Gear\"></a>";
-	$output .= "<h2 id=\"uespd2Gear\" class=\"build-header\">Gear</h2>";
+	$output .= "<h2 id=\"uespd2Gear\">Gear</h2>";
 	
 	$output .= uespDestiny2Build_CreateWeaponHtml($buildData, 'Kinetic Weapons', 'kinetic');
 	$output .= uespDestiny2Build_CreateWeaponHtml($buildData, 'Energy Weapons', 'energy');
@@ -268,7 +265,7 @@ function uespDestiny2Build_CreateArmorModsHtml($buildData)
 	if ($modData == null) return "";
 	
 	$output = "<a name=\"Important_Mods\"></a>";
-	$output .= "<h3 id=\"uespd2ImportantMods\" class=\"build-header\">Important Mods</h3>";
+	$output .= "<h3 id=\"uespd2ImportantMods\">Important Mods</h3>";
 	
 	$intro = $modData['armor_mods_intro'];
 	if ($intro) $output .= $intro;
@@ -312,7 +309,7 @@ function uespDestiny2Build_CreateArmorModTable($buildData, $dataType, $modName, 
 		if ($extraDesc != "") $desc .= ' ' . CUespDestiny2WordPressPlugin::EscapeHtml($extraDesc);
 		
 		$output .= "<tr>";
-		$output .= "<td>$modName</td>";
+		$output .= "<td class='uespd2NoWrap'>$modName</td>";
 		$output .= "<td>$iconTag<br/>$name<br/>$desc</td>";
 		$output .= "</tr>";
 	}
@@ -329,7 +326,7 @@ function uespDestiny2Build_CreateArmorStatsHtml($buildData)
 	if ($armorData == null) return "";
 	
 	$output = "<a name=\"Armor_Stats\"></a>";
-	$output .= "<h3 id=\"uespd2ExoticArmor\" class=\"build-header\">Armor Stats</h3>";
+	$output .= "<h3 id=\"uespd2ExoticArmor\">Armor Stats</h3>";
 	
 	$armorStats = $armorData['armor_stats'];
 	$output .= $armorStats;
@@ -344,7 +341,7 @@ function uespDestiny2Build_CreateExoticArmorHtml($buildData)
 	if ($armorDatas == null) return "";
 	
 	$output = "<a name=\"Exotic_Armor\"></a>";
-	$output .= "<h3 id=\"uespd2ExoticArmor\" class=\"build-header\">Exotic Armor</h3>";
+	$output .= "<h3 id=\"uespd2ExoticArmor\">Exotic Armor</h3>";
 	
 	$output .= '<table class="uespd2DataTable">';
 	$output .= '<tr>';
@@ -400,7 +397,7 @@ function uespDestiny2Build_CreateExoticArmorHtml($buildData)
 	if ($stats != null && $stats != "")
 	{
 		$output = "<a name=\"Armor_Stats\"></a>";
-		$output .= "<h3 id=\"uespd2ArmorStats\" class=\"build-header\">Armor Stats</h3>";
+		$output .= "<h3 id=\"uespd2ArmorStats\">Armor Stats</h3>";
 		$output .= $stats;
 	}
 	
@@ -412,7 +409,7 @@ function uespDestiny2Build_CreateWeaponHtml($buildData, $weaponType, $dataType)
 {
 	$label = str_replace(' ', '_', $weaponType);
 	$output = "<a name=\"$label\"></a>";
-	$output .= "<h3 class=\"build-header\">$weaponType</h3>";
+	$output .= "<h3>$weaponType</h3>";
 	
 	$weaponData = unserialize($buildData[$dataType . "_weapons_group"][0]);
 	if ($weaponData == null) return $output;
@@ -534,6 +531,7 @@ function uesp_destinybuilds_single_posts_body_class( $classes )
 function uespDestiny2OutputBuild( $theme )
 {
 	if ($theme === "Genesis") return uespDestiny2OutputBuild_Genesis();
+	if ($theme === "Altitude Pro") return uespDestiny2OutputBuild_Genesis();
 	if ($theme === "News Vibrant Pro") return uespDestiny2OutputBuild_NewsVibrantPro();
 	return uespDestiny2OutputBuild_Content();
 }

@@ -9,5 +9,20 @@
 }
 
 .uespd2DataText {
-	margin-bottom: 7px;
+	margin-bottom: 20px;
+	color: white;
+}
+
+.uespd2NoWrap {
+	white-space: nowrap;
+}
+
+.dg_destiny_builds h2,
+.dg_destiny_builds h3,
+.dg_destiny_builds h4 {
+	margin-top: 40px;
+}
+
+.dg_destiny_builds .build-header {
+	border: none;
 }
