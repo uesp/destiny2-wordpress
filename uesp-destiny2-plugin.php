@@ -25,14 +25,22 @@ class CUespDestiny2WordPressPlugin extends CUespDestiny2WordPressData
 		
 		wp_enqueue_script( 'uespd2tooltipjs', plugin_dir_url(__FILE__) . 'js/tooltip.js', array( 'jquery' ) );
 		wp_enqueue_script( 'uespd2buildjs', plugin_dir_url(__FILE__) . 'js/builds.js', array( 'jquery' ) );
+	}
+	
+	
+	public static function EnqueueAdminResources()
+	{
+		self::EnqueueResources();
 		
-		wp_add_inline_script( 'uespd2buildjs', self::GetBuildDataJs(), 'before'); 
+		wp_add_inline_script( 'uespd2buildjs', self::GetBuildDataJs(), 'before');
 	}
 	
 	
 	public static function GetBuildDataJs()
 	{
-		$output = 'const UESPD2_KINETICWEAPON_DATA = ';
+		$output = '';
+		
+		$output .= 'const UESPD2_KINETICWEAPON_DATA = ';
 		$output .= json_encode(self::DATA_KINETICWEAPONS) . ";\n";
 		
 		$output .= 'const UESPD2_ENERGYWEAPON_DATA = ';
@@ -198,7 +206,7 @@ class CUespDestiny2WordPressPlugin extends CUespDestiny2WordPressData
 
 
 add_action( 'wp_enqueue_scripts', 'CUespDestiny2WordPressPlugin::EnqueueResources' );
-add_action( 'admin_enqueue_scripts', 'CUespDestiny2WordPressPlugin::EnqueueResources' );
+add_action( 'admin_enqueue_scripts', 'CUespDestiny2WordPressPlugin::EnqueueAdminResources' );
 add_filter( 'piklist_post_types', 'CUespDestiny2WordPressPlugin::PikListPostTypes' );
 add_action( 'init', 'CUespDestiny2WordPressPlugin::RegisterTaxonomies' );
 

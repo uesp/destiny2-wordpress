@@ -3,8 +3,8 @@
 window.uespd2UpdateAllWeaponPerks = function(updateFromHidden)
 {
 	uespd2UpdateAllWeaponPerksType("kinetic", updateFromHidden, UESPD2_KINETICWEAPON_DATA);
-	uespd2UpdateAllWeaponPerksType("energy", updateFromHidden, UESPD2_ENERGYWEAPON_DATA);
-	uespd2UpdateAllWeaponPerksType("power", updateFromHidden, UESPD2_POWERWEAPON_DATA);
+	uespd2UpdateAllWeaponPerksType("energy", updateFromHidden,  UESPD2_ENERGYWEAPON_DATA);
+	uespd2UpdateAllWeaponPerksType("power", updateFromHidden,  UESPD2_POWERWEAPON_DATA);
 	
 	//_post_meta_weapons_group_0_kinetic_weapon_id_0
 	//_post_meta_weapons_group_0_kinetic_weapon_perk1_id_0
@@ -14,6 +14,8 @@ window.uespd2UpdateAllWeaponPerks = function(updateFromHidden)
 
 window.uespd2UpdateAllWeaponPerksType = function(weaponType, updateFromHidden, weaponData)
 {
+	if (weaponData == null) return;
+	
 	var selectClass = '_post_meta_' + weaponType + '_weapons_group_' + weaponType + '_weapon_id';
 	var elements = jQuery('select.' + selectClass);
 	
@@ -26,6 +28,8 @@ window.uespd2UpdateAllWeaponPerksType = function(weaponType, updateFromHidden, w
 
 window.uespd2UpdateWeaponPerks = function(element, weaponType, updateFromHidden, weaponData)
 {
+	if (weaponData == null) return;
+	
 	var id = element.attr('id');
 	var weaponId = parseInt(element.val());
 	
@@ -188,6 +192,8 @@ window.uespd2UpdateArmorListPerks = function(e)
 
 window.uespd2UpdateArmorPerks = function(element, updateFromHidden, armorData)
 {
+	if (armorData == null) return;
+	
 	var id = element.attr('id');
 	var armorId = parseInt(element.val());
 	
@@ -229,6 +235,9 @@ jQuery(function() {
 	jQuery(document).on('change', '._post_meta_exotic_armor_group_exotic_armor_id', uespd2UpdateArmorListPerks);
 	jQuery(document).on('change', '._post_meta_exotic_armor_group_exotic_armor_perk_id', uespd2UpdateArmorPerkFormValue);
 	
-	uespd2UpdateAllWeaponPerks(true);
-	uespd2UpdateAllArmorPerks(true);
+	if (typeof(UESPD2_KINETICWEAPON_DATA) !== "undefined")
+	{
+		uespd2UpdateAllWeaponPerks(true);
+		uespd2UpdateAllArmorPerks(true);
+	}
 });

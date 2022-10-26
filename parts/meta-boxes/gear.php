@@ -6,6 +6,19 @@ Post Type: dg_destiny_builds
 */
 
 piklist('field', array(
+			'type' => 'editor',
+			'field' => 'kinetic_weapon_desc',
+			'required' => false,
+			'label' => 'Kinetic Weapon Description',
+			'columns' => 12,
+			'add_more' => false,
+			'attributes' => array(
+				'placeholder' => 'Place extra kinetic weapon description here...',
+			),
+		)
+);
+
+piklist('field', array(
 	'type' => 'group',
 	'field' => 'kinetic_weapons_group',
 	'label' => 'Kinetic Weapons',
@@ -63,6 +76,19 @@ piklist('field', array(
 		),
 	),
 ) );
+
+piklist('field', array(
+			'type' => 'editor',
+			'field' => 'energy_weapon_desc',
+			'required' => false,
+			'label' => 'Energy Weapon Description',
+			'columns' => 12,
+			'add_more' => false,
+			'attributes' => array(
+				'placeholder' => 'Place extra energy weapon description here...',
+			),
+		)
+);
 
 piklist('field', array(
 	'type' => 'group',
@@ -124,6 +150,19 @@ piklist('field', array(
 ) );
 
 piklist('field', array(
+			'type' => 'editor',
+			'field' => 'heavy_weapon_desc',
+			'required' => false,
+			'label' => 'Heavy Weapon Description',
+			'columns' => 12,
+			'add_more' => false,
+			'attributes' => array(
+				'placeholder' => 'Place extra heavy weapon description here...',
+			),
+		)
+);
+
+piklist('field', array(
 	'type' => 'group',
 	'field' => 'power_weapons_group',
 	'label' => 'Heavy Weapons',
@@ -182,6 +221,18 @@ piklist('field', array(
 	),
 ) );
 
+piklist('field', array(
+			'type' => 'editor',
+			'field' => 'exotic_armor_desc',
+			'required' => false,
+			'label' => 'Armor Description',
+			'columns' => 12,
+			'add_more' => false,
+			'attributes' => array(
+				'placeholder' => 'Place extra armor description here...',
+			),
+		)
+);
 
 piklist('field', array(
 	'type' => 'group',

@@ -37,7 +37,7 @@ function uespDestiny2OutputBuild_Content()
 	
 	$buildData = get_post_custom();
 	
-	?>	
+?>
 <h2>Table of Contents</h2>
 <ul class="ez-toc-list ez-toc-list-level-1">
 	<li class="ez-toc-page-1 ez-toc-heading-level-3"><a class="ez-toc-link ez-toc-heading-1 __mPS2id _mPS2id-h mPS2id-highlight" href="#Should_you_play_this_build" title="Should you play this build?">Should you play this build?</a></li>
@@ -165,6 +165,9 @@ function uespDestiny2Build_OutputAbilities($buildData)
 	$abilityData = unserialize($buildData["abilities_group"][0]);
 	//$output .= print_r($abilityData, true);
 	
+	$extraDesc = $abilityData['ability_desc'];
+	if ($extraDesc) $output .= "<div class=\"uespd2DataText\">$extraDesc</div>";
+	
 	$output .= "<table class=\"uespd2DataTable\">";
 	
 	$ouptut .= "<tr>";
@@ -245,9 +248,9 @@ function uespDestiny2Build_OutputGear($buildData)
 	$output = "<a name=\"Gear\"></a>";
 	$output .= "<h2 id=\"uespd2Gear\">Gear</h2>";
 	
-	$output .= uespDestiny2Build_CreateWeaponHtml($buildData, 'Kinetic Weapons', 'kinetic');
-	$output .= uespDestiny2Build_CreateWeaponHtml($buildData, 'Energy Weapons', 'energy');
-	$output .= uespDestiny2Build_CreateWeaponHtml($buildData, 'Heavy Weapons', 'power');
+	$output .= uespDestiny2Build_CreateWeaponHtml($buildData, 'Kinetic Weapons', 'kinetic', 'kinetic_weapon_desc');
+	$output .= uespDestiny2Build_CreateWeaponHtml($buildData, 'Energy Weapons', 'energy', 'energy_weapon_desc');
+	$output .= uespDestiny2Build_CreateWeaponHtml($buildData, 'Heavy Weapons', 'power', 'heavy_weapon_desc');
 	
 	$output .= uespDestiny2Build_CreateExoticArmorHtml($buildData);
 	$output .= uespDestiny2Build_CreateArmorStatsHtml($buildData);
@@ -343,6 +346,9 @@ function uespDestiny2Build_CreateExoticArmorHtml($buildData)
 	$output = "<a name=\"Exotic_Armor\"></a>";
 	$output .= "<h3 id=\"uespd2ExoticArmor\">Exotic Armor</h3>";
 	
+	$extraDesc = $buildData["exotic_armor_desc"][0];
+	if ($extraDesc) $output .= "<div class=\"uespd2DataText\">$extraDesc</div>";
+	
 	$output .= '<table class="uespd2DataTable">';
 	$output .= '<tr>';
 	$output .= "<th>Exotic Armor</th>";
@@ -405,11 +411,14 @@ function uespDestiny2Build_CreateExoticArmorHtml($buildData)
 }
 
 
-function uespDestiny2Build_CreateWeaponHtml($buildData, $weaponType, $dataType)
+function uespDestiny2Build_CreateWeaponHtml($buildData, $weaponType, $dataType, $descId)
 {
 	$label = str_replace(' ', '_', $weaponType);
 	$output = "<a name=\"$label\"></a>";
 	$output .= "<h3>$weaponType</h3>";
+	
+	$extraDesc = $buildData[$descId][0];
+	if ($extraDesc) $output .= "<div class=\"uespd2DataText\">$extraDesc</div>";
 	
 	$weaponData = unserialize($buildData[$dataType . "_weapons_group"][0]);
 	if ($weaponData == null) return $output;

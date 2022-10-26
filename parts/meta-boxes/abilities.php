@@ -14,6 +14,17 @@ piklist('field', array(
 	'add_more' => false,
 	'fields' => array(
 		array(
+			'type' => 'editor',
+			'field' => 'ability_desc',
+			'required' => false,
+			'label' => 'Ability Description',
+			'columns' => 12,
+			'add_more' => false,
+			'attributes' => array(
+				'placeholder' => 'Place extra ability description here...',
+			),
+		),
+		array(
 			'type' => 'select',
 			'field' => 'super_ability_id',
 			'required' => false,
