@@ -73,6 +73,20 @@ function uespDestiny2OutputBuild_Content()
 }
 
 
+
+function uespDestiny2Build_CreateDataTableGroupId($buildData, $groupId, $constantName, $extraTableDef = "", $colEachItem = false, $idField = null)
+{
+	//return "$groupId::". print_r($buildData[$groupId], true) . "\n";
+	
+	$abilityData = unserialize($buildData[$groupId][0]);
+	if ($abilityData == null) return '';
+	
+	//return "$groupId::". print_r($abilityData, true) . "<br/>\n";
+	
+	return uespDestiny2Build_CreateDataTable($abilityData, $constantName, $extraTableDef, $colEachItem, $idField);
+}
+
+
 function uespDestiny2Build_CreateDataTable($datas, $constantName, $extraTableDef = "", $colEachItem = false, $idField = null)
 {
 	if ($datas == null) return "";
@@ -82,6 +96,8 @@ function uespDestiny2Build_CreateDataTable($datas, $constantName, $extraTableDef
 	
 	foreach ($datas as $data)
 	{
+		//$output .=  "::". print_r($data, true) . "<br/>\n";
+		
 		if ($idField == null)
 			$id = $data;
 		else
@@ -101,13 +117,22 @@ function uespDestiny2Build_CreateDataTable($datas, $constantName, $extraTableDef
 		$iconTag = CUespDestiny2WordPressPlugin::MakeIconImageTag($values['icon'], $values['name']);
 		
 		$output .= "$iconTag";
-		$output .= "<br/>$name";
+		$output .= "<br/>$name<br style='clear:both;' />";
 		
 		if ($colEachItem) $output .= "</td>";
 	}
 	
 	if (!$colEachItem) $output .= "</td>";
 	return $output;
+}
+
+
+function uespDestiny2Build_CreateDataTextGroupId($buildData, $groupId, $constantName, $typeName = null, $idField = null, $descField = null)
+{
+	$abilityData = unserialize($buildData[$groupId][0]);
+	if ($abilityData == null) return '';
+	
+	return uespDestiny2Build_CreateDataText($abilityData, $constantName, $typeName, $idField, $descField);
 }
 
 
@@ -171,21 +196,21 @@ function uespDestiny2Build_OutputAbilities($buildData)
 	$output .= "<table class=\"uespd2DataTable\">";
 	
 	$ouptut .= "<tr>";
-	$output .= uespDestiny2Build_CreateDataTable($abilityData['super_ability_id'], 'SuperAbilities', "colspan=\"100\"");
+	$output .= uespDestiny2Build_CreateDataTableGroupId($buildData, 'super_abilities_group', 'SuperAbilities', "colspan=\"100\"", false, 'super_ability_id');
 	$output .= "</tr><tr>";
 	
-	$output .= uespDestiny2Build_CreateDataTable($abilityData['class_ability_id'], 'ClassAbilities');
-	$output .= uespDestiny2Build_CreateDataTable($abilityData['movement_ability_id'], 'MovementAbilities');
-	$output .= uespDestiny2Build_CreateDataTable($abilityData['arc_grenade_id'], 'ArcGrenade');
-	$output .= uespDestiny2Build_CreateDataTable($abilityData['arc_melee_id'], 'ArcMelee');
+	$output .= uespDestiny2Build_CreateDataTableGroupId($buildData, 'class_abilities_group', 'ClassAbilities', '', false, 'class_ability_id');
+	$output .= uespDestiny2Build_CreateDataTableGroupId($buildData, 'movement_abilities_group', 'MovementAbilities', '', false, 'movement_ability_id');
+	$output .= uespDestiny2Build_CreateDataTableGroupId($buildData, 'arc_grenade_abilities_group', 'ArcGrenade', '', false, 'arc_grenade_id');
+	$output .= uespDestiny2Build_CreateDataTableGroupId($buildData, 'arc_melee_abilities_group', 'ArcMelee', '', false, 'arc_melee_id');
 	
 	$output .= "</tr></table>";
 	
-	$output .= uespDestiny2Build_CreateDataText($abilityData['super_ability_id'], 'SuperAbilities', 'Super Ability');
-	$output .= uespDestiny2Build_CreateDataText($abilityData['class_ability_id'], 'ClassAbilities', 'Class Ability');
-	$output .= uespDestiny2Build_CreateDataText($abilityData['movement_ability_id'], 'MovementAbilities', 'Movement Ability');
-	$output .= uespDestiny2Build_CreateDataText($abilityData['arc_grenade_id'], 'ArcGrenade', 'Arc Grenade');
-	$output .= uespDestiny2Build_CreateDataText($abilityData['arc_melee_id'], 'ArcMelee', 'Arc Melee');
+	$output .= uespDestiny2Build_CreateDataTextGroupId($buildData, 'super_abilities_group', 'SuperAbilities', 'Super Ability', 'super_ability_id', 'super_ability_desc');
+	$output .= uespDestiny2Build_CreateDataTextGroupId($buildData, 'class_abilities_group', 'ClassAbilities', 'Class Ability', 'class_ability_id', 'class_ability_desc');
+	$output .= uespDestiny2Build_CreateDataTextGroupId($buildData, 'movement_abilities_group', 'MovementAbilities', 'Movement Ability', 'movement_ability_id', 'movement_ability_desc');
+	$output .= uespDestiny2Build_CreateDataTextGroupId($buildData, 'arc_grenade_abilities_group', 'ArcGrenade', 'Arc Grenade', 'arc_grenade_id', 'arc_grenade_desc');
+	$output .= uespDestiny2Build_CreateDataTextGroupId($buildData, 'arc_melee_abilities_group', 'ArcMelee', 'Arc Melee', 'arc_melee_id', 'arc_melee_desc');
 	
 	print($output);
 }
@@ -267,7 +292,7 @@ function uespDestiny2Build_CreateArmorModsHtml($buildData)
 	$modData = unserialize($buildData["armor_mods_group"][0]);
 	if ($modData == null) return "";
 	
-	$output = "<a name=\"Important_Mods\"></a>";
+	$output .= "<a name=\"Important_Mods\"></a>";
 	$output .= "<h3 id=\"uespd2ImportantMods\">Important Mods</h3>";
 	
 	$intro = $modData['armor_mods_intro'];
@@ -328,7 +353,7 @@ function uespDestiny2Build_CreateArmorStatsHtml($buildData)
 	$armorData = unserialize($buildData["armor_stats_group"][0]);
 	if ($armorData == null) return "";
 	
-	$output = "<a name=\"Armor_Stats\"></a>";
+	$output .= "<a name=\"Armor_Stats\"></a>";
 	$output .= "<h3 id=\"uespd2ExoticArmor\">Armor Stats</h3>";
 	
 	$armorStats = $armorData['armor_stats'];
@@ -402,7 +427,7 @@ function uespDestiny2Build_CreateExoticArmorHtml($buildData)
 	
 	if ($stats != null && $stats != "")
 	{
-		$output = "<a name=\"Armor_Stats\"></a>";
+		$output .= "<a name=\"Armor_Stats\"></a>";
 		$output .= "<h3 id=\"uespd2ArmorStats\">Armor Stats</h3>";
 		$output .= $stats;
 	}
@@ -512,7 +537,7 @@ function uespDestiny2Build_CreateWeaponTextHtml($weaponDatas, $weaponType, $data
 		$values = CUespDestiny2WordPressPlugin::GetData($constantName, $weaponId, false);
 		if ($values === false) continue;
 		
-		$output = '<div class="uespd2DataText">';
+		$output .= '<div class="uespd2DataText">';
 		
 		$desc = CUespDestiny2WordPressPlugin::EscapeHtml($values['desc']);
 		$name = CUespDestiny2WordPressPlugin::EscapeHtml($values['name']);
