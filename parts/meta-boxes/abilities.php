@@ -5,6 +5,20 @@ Description: Controls the details about the abilities for the build
 Post Type: dg_destiny_builds
 */
 
+$options = array( // Pass any option that is accepted by wp_editor()
+      'wpautop' => true,
+      'media_buttons' => true,
+      'shortcode_buttons' => true,
+      'teeny' => false,
+      'dfw' => false,
+      'quicktags' => true,
+      'drag_drop_upload' => true,
+      'tinymce' => array(
+        'resize' => false,
+        'wp_autoresize_on' => true
+      )
+);
+
 piklist('field', array(
 	'type' => 'group',
 	'field' => 'abilities_group',
@@ -20,6 +34,7 @@ piklist('field', array(
 			'label' => 'Ability Description',
 			'columns' => 12,
 			'add_more' => false,
+			'options' => $options,
 			'attributes' => array(
 				'placeholder' => 'Place extra ability description here...',
 			),

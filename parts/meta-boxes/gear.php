@@ -5,6 +5,20 @@ Description: Controls the details about the weapons and armor for the build
 Post Type: dg_destiny_builds
 */
 
+$options = array( // Pass any option that is accepted by wp_editor()
+      'wpautop' => true,
+      'media_buttons' => true,
+      'shortcode_buttons' => true,
+      'teeny' => false,
+      'dfw' => false,
+      'quicktags' => true,
+      'drag_drop_upload' => true,
+      'tinymce' => array(
+        'resize' => false,
+        'wp_autoresize_on' => true
+      )
+);
+
 piklist('field', array(
 			'type' => 'editor',
 			'field' => 'kinetic_weapon_desc',
@@ -12,6 +26,7 @@ piklist('field', array(
 			'label' => 'Kinetic Weapon Description',
 			'columns' => 12,
 			'add_more' => false,
+			'options' => $options,
 			'attributes' => array(
 				'placeholder' => 'Place extra kinetic weapon description here...',
 			),
@@ -84,6 +99,7 @@ piklist('field', array(
 			'label' => 'Energy Weapon Description',
 			'columns' => 12,
 			'add_more' => false,
+			'options' => $options,
 			'attributes' => array(
 				'placeholder' => 'Place extra energy weapon description here...',
 			),
@@ -156,6 +172,7 @@ piklist('field', array(
 			'label' => 'Heavy Weapon Description',
 			'columns' => 12,
 			'add_more' => false,
+			'options' => $options,
 			'attributes' => array(
 				'placeholder' => 'Place extra heavy weapon description here...',
 			),
@@ -228,6 +245,7 @@ piklist('field', array(
 			'label' => 'Armor Description',
 			'columns' => 12,
 			'add_more' => false,
+			'options' => $options,
 			'attributes' => array(
 				'placeholder' => 'Place extra armor description here...',
 			),
@@ -295,6 +313,7 @@ piklist('field', array(
 			'label' => 'Armor Stats',
 			'columns' => 12,
 			'add_more' => false,
+			'options' => $options,
 			'attributes' => array(
 					'placeholder' => 'Put any extra description text here...',
 			),
@@ -323,6 +342,7 @@ piklist('field', array(
 			'label' => 'Introduction',
 			'columns' => 12,
 			'add_more' => false,
+			'options' => $options,
 			'attributes' => array(
 					'placeholder' => 'Put any introduction...',
 			),
@@ -511,6 +531,7 @@ piklist('field', array(
 			'label' => 'Additional Gear Mods',
 			'columns' => 12,
 			'add_more' => false,
+			'options' => $options,
 			'attributes' => array(
 					'placeholder' => 'Put any extra description text here...',
 			),

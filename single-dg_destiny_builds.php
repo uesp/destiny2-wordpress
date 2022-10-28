@@ -191,7 +191,12 @@ function uespDestiny2Build_OutputAbilities($buildData)
 	//$output .= print_r($abilityData, true);
 	
 	$extraDesc = $abilityData['ability_desc'];
-	if ($extraDesc) $output .= "<div class=\"uespd2DataText\">$extraDesc</div>";
+	
+	if ($extraDesc) 
+	{
+		$extraDesc = apply_filters( 'the_content', $extraDesc );
+		$output .= "<div class=\"uespd2DataText\">$extraDesc</div>";
+	}
 	
 	$output .= "<table class=\"uespd2DataTable\">";
 	
@@ -296,7 +301,12 @@ function uespDestiny2Build_CreateArmorModsHtml($buildData)
 	$output .= "<h3 id=\"uespd2ImportantMods\">Important Mods</h3>";
 	
 	$intro = $modData['armor_mods_intro'];
-	if ($intro) $output .= $intro;
+	
+	if ($intro)
+	{
+		$intro = apply_filters( 'the_content', $intro );
+		$output .= $intro;
+	}
 	
 	$output .= '<table class="uespd2DataTable">';
 	
@@ -309,7 +319,12 @@ function uespDestiny2Build_CreateArmorModsHtml($buildData)
 	$output .= '</table>';
 	
 	$addt = $modData['armor_mods_additional'];
-	if ($addt) $output .= $addt;
+	
+	if ($addt) 
+	{
+		$addt = apply_filters( 'the_content', $addt );
+		$output .= $addt;
+	}
 	
 	return $output;
 }
@@ -372,7 +387,12 @@ function uespDestiny2Build_CreateExoticArmorHtml($buildData)
 	$output .= "<h3 id=\"uespd2ExoticArmor\">Exotic Armor</h3>";
 	
 	$extraDesc = $buildData["exotic_armor_desc"][0];
-	if ($extraDesc) $output .= "<div class=\"uespd2DataText\">$extraDesc</div>";
+	
+	if ($extraDesc) 
+	{
+		$extraDesc = apply_filters( 'the_content', $extraDesc );
+		$output .= "<div class=\"uespd2DataText\">$extraDesc</div>";
+	}
 	
 	$output .= '<table class="uespd2DataTable">';
 	$output .= '<tr>';
@@ -423,12 +443,14 @@ function uespDestiny2Build_CreateExoticArmorHtml($buildData)
 	$output .= "</table>\n";
 	$output .= $textOutput;
 	
-	$stats = CUespDestiny2WordPressPlugin::EscapeHtml($values['armor_stats']);
+	$stats = $values['armor_stats'];
 	
 	if ($stats != null && $stats != "")
 	{
 		$output .= "<a name=\"Armor_Stats\"></a>";
 		$output .= "<h3 id=\"uespd2ArmorStats\">Armor Stats</h3>";
+		
+		$stats = apply_filters( 'the_content', $stats );
 		$output .= $stats;
 	}
 	
@@ -443,7 +465,12 @@ function uespDestiny2Build_CreateWeaponHtml($buildData, $weaponType, $dataType, 
 	$output .= "<h3>$weaponType</h3>";
 	
 	$extraDesc = $buildData[$descId][0];
-	if ($extraDesc) $output .= "<div class=\"uespd2DataText\">$extraDesc</div>";
+	
+	if ($extraDesc) 
+	{
+		$extraDesc = apply_filters( 'the_content', $extraDesc );
+		$output .= "<div class=\"uespd2DataText\">$extraDesc</div>";
+	}
 	
 	$weaponData = unserialize($buildData[$dataType . "_weapons_group"][0]);
 	if ($weaponData == null) return $output;
