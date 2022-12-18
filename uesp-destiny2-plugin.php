@@ -149,6 +149,7 @@ class CUespDestiny2WordPressPlugin extends CUespDestiny2WordPressData
 						'editor',
 						'excerpt',
 						'thumbnail',
+						'author',
 				),
 				'public' => true,
 				'has_archive' => true,
