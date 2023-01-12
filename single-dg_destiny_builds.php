@@ -214,8 +214,8 @@ function uespDestiny2Build_OutputAbilities($buildData)
 	$output .= uespDestiny2Build_CreateDataTextGroupId($buildData, 'super_abilities_group', 'SuperAbilities', 'Super Ability', 'super_ability_id', 'super_ability_desc');
 	$output .= uespDestiny2Build_CreateDataTextGroupId($buildData, 'class_abilities_group', 'ClassAbilities', 'Class Ability', 'class_ability_id', 'class_ability_desc');
 	$output .= uespDestiny2Build_CreateDataTextGroupId($buildData, 'movement_abilities_group', 'MovementAbilities', 'Movement Ability', 'movement_ability_id', 'movement_ability_desc');
-	$output .= uespDestiny2Build_CreateDataTextGroupId($buildData, 'arc_grenade_abilities_group', 'ArcGrenade', 'Arc Grenade', 'arc_grenade_id', 'arc_grenade_desc');
-	$output .= uespDestiny2Build_CreateDataTextGroupId($buildData, 'arc_melee_abilities_group', 'ArcMelee', 'Arc Melee', 'arc_melee_id', 'arc_melee_desc');
+	$output .= uespDestiny2Build_CreateDataTextGroupId($buildData, 'arc_grenade_abilities_group', 'ArcGrenade', 'Grenade', 'arc_grenade_id', 'arc_grenade_desc');
+	$output .= uespDestiny2Build_CreateDataTextGroupId($buildData, 'arc_melee_abilities_group', 'ArcMelee', 'Melee', 'arc_melee_id', 'arc_melee_desc');
 	
 	print($output);
 }
