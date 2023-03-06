@@ -310,10 +310,10 @@ function uespDestiny2Build_CreateArmorModsHtml($buildData)
 	
 	$output .= '<table class="uespd2DataTable">';
 	
+	$output .= uespDestiny2Build_CreateArmorModTable($buildData, 'head', 'Head', 'HEADARMORMODS');
 	$output .= uespDestiny2Build_CreateArmorModTable($buildData, 'arm', 'Arms', 'ARMARMORMODS');
 	$output .= uespDestiny2Build_CreateArmorModTable($buildData, 'chest', 'Chest', 'CHESTARMORMODS');
 	$output .= uespDestiny2Build_CreateArmorModTable($buildData, 'leg', 'Legs', 'LEGARMORMODS');
-	$output .= uespDestiny2Build_CreateArmorModTable($buildData, 'head', 'Head', 'HEADARMORMODS');
 	$output .= uespDestiny2Build_CreateArmorModTable($buildData, 'class', 'Class', 'CLASSARMORMODS');
 	
 	$output .= '</table>';

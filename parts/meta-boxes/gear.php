@@ -358,6 +358,38 @@ piklist('field', array(
 
 piklist('field', array(
 	'type' => 'group',
+	'field' => 'head_armor_mods_group',
+	'label' => 'Head Armor Mods',
+	'list' => false,
+	'disable_label' => false,
+	'add_more' => true,
+	'fields' => array(
+		array(
+			'type' => 'select',
+			'field' => 'head_armor_mod_id',
+			'required' => false,
+			'label' => 'Head Armor Mod',
+			'columns' => 2,
+			'choices' => CUespDestiny2WordPressPlugin::CreateChoices('HeadArmorMods', 'Head Armor Mod'),
+			'add_more' => false,
+		),
+		array(
+			'type' => 'text',
+			'field' => 'head_armor_mod_desc',
+			'required' => false,
+			'label' => 'Description',
+			'columns' => 4,
+			'add_more' => false,
+			'attributes' => array(
+					'placeholder' => 'Put any extra description here...',
+			),
+		),
+	),
+) );
+
+
+piklist('field', array(
+	'type' => 'group',
 	'field' => 'arm_armor_mods_group',
 	'label' => 'Arm Armor Mods',
 	'list' => false,
@@ -408,38 +440,6 @@ piklist('field', array(
 		array(
 			'type' => 'text',
 			'field' => 'chest_armor_mod_desc',
-			'required' => false,
-			'label' => 'Description',
-			'columns' => 4,
-			'add_more' => false,
-			'attributes' => array(
-					'placeholder' => 'Put any extra description here...',
-			),
-		),
-	),
-) );
-
-
-piklist('field', array(
-	'type' => 'group',
-	'field' => 'head_armor_mods_group',
-	'label' => 'Head Armor Mods',
-	'list' => false,
-	'disable_label' => false,
-	'add_more' => true,
-	'fields' => array(
-		array(
-			'type' => 'select',
-			'field' => 'head_armor_mod_id',
-			'required' => false,
-			'label' => 'Head Armor Mod',
-			'columns' => 2,
-			'choices' => CUespDestiny2WordPressPlugin::CreateChoices('HeadArmorMods', 'Head Armor Mod'),
-			'add_more' => false,
-		),
-		array(
-			'type' => 'text',
-			'field' => 'head_armor_mod_desc',
 			'required' => false,
 			'label' => 'Description',
 			'columns' => 4,
