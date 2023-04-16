@@ -39,6 +39,11 @@ piklist('field', array(
 				'placeholder' => 'Place extra ability description here...',
 			),
 		),
+		array(
+			'type' => 'hidden',
+			'field' => 'ability_desc_id_hidden',
+			'value' => '1234',
+		),
 	),
 ) );
 
@@ -212,4 +217,3 @@ piklist('field', array(
 	),
 ));
 
-?>
