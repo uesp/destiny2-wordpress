@@ -87,7 +87,7 @@ class CUespDestiny2WordPressPlugin extends CUespDestiny2WordPressData
 	{
 		if ($icon == null || $icon == "") return "";
 		
-		$name = self::EscapeHtml($text);
+		$name = self::EscapeHtml($name);
 		
 		return "<img src=\"https://www.bungie.net$icon\" title=\"$name\">";
 	}
@@ -117,7 +117,7 @@ class CUespDestiny2WordPressPlugin extends CUespDestiny2WordPressData
 	}
 	
 	
-	public static function CreateChoices($type, $blankName)
+	public static function CreateChoices($type, $blankName, $insertBlank = true)
 	{
 		$name = "CUespDestiny2WordPressPlugin::DATA_" . strtoupper($type);
 		if (!defined($name)) return [];
@@ -131,8 +131,29 @@ class CUespDestiny2WordPressPlugin extends CUespDestiny2WordPressData
 		}
 		
 		uasort($choices, ['CUespDestiny2WordPressPlugin', 'SortChoices']);
-		$choices = ['' => "$blankName" ] + $choices;
+		if($insertBlank){
+			$choices = ['' => "$blankName" ] + $choices;
+		}
 		return $choices;
+	}
+	
+	
+	public static function CreateChoicesPerks($type, $blankName)
+	{
+		$name = "CUespDestiny2WordPressPlugin::DATA_" . strtoupper($type);
+		if (!defined($name)) return [];
+		
+		$data = constant($name);
+		$choices = [];
+		
+		foreach ($data as $weapon)
+		{
+			foreach ($weapon["sockets"] as $id => $row){
+				if (!array_key_exists($id, $choices)){
+					$choices[$id] = $row['name'];
+				}
+			}
+		}
 	}
 	
 	
